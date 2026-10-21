@@ -25,9 +25,8 @@ Tables are created automatically and seeded on first boot with **12 users, 25 gi
 Authentication is handled by **Better Auth**, hosted by the Express API at `/api/auth/*` with its own tables (`user`, `session`, `account`, `verification`) in the same database. The domain profile lives in `users` and is linked to the auth account by email.
 
 - **Roles are contextual, not account types:** a signed-in user is the *Poster* on gigs they own and the *Applicant* on gigs they applied to. The API derives the acting user from the session for every mutation — unauthenticated writes return `401`.
-- **Demo accounts:** all 12 seeded users can sign in with the password `campus1234` (e.g. `emma@campusloop.edu`). The login page has one-tap demo sign-in.
+- **Demo accounts:** all 12 seeded users can sign in with the password `campus1234` (e.g. `sunjay@campusloop.edu`). The login page has one-tap demo sign-in.
 - **New accounts:** sign up at `/signup` (name, email, password), then the profile step creates the domain profile (`POST /api/profile`, session required).
-- First-time setup against a fresh database: `npm --prefix server run migrate:auth` once to create Better Auth's tables, then start the API (it seeds demo accounts automatically).
 
 `server/.env` (gitignored) holds `DATABASE_URL`, `BETTER_AUTH_SECRET`, and `BETTER_AUTH_URL` — copy `server/.env.example` to get started.
 

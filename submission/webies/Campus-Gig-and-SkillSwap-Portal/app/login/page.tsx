@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label'
 import { ArrowRight } from 'lucide-react'
 import { authClient } from '@/lib/auth-client'
 
-const DEMO_EMAIL = 'emma@campusloop.edu'
+const DEMO_EMAIL = 'sunjay@campusloop.edu'
 const DEMO_PASSWORD = 'campus1234'
 
 export default function LoginPage() {

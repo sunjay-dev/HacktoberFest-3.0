@@ -62,6 +62,8 @@ export type Review = {
 
 export type Stats = { open_gigs: number; active_students: number; avg_rating: string | null; review_count: number }
 
+export type Profile = User & { reviews_received: Review[] }
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, { headers: { 'Content-Type': 'application/json' }, ...init })
   const data = await res.json().catch(() => ({}))
@@ -74,7 +76,7 @@ export const api = {
   createProfile: (body: Record<string, unknown>) => request<User>('/api/profile', { method: 'POST', body: JSON.stringify(body) }),
   updateProfile: (body: Record<string, unknown>) => request<User>('/api/profile', { method: 'PATCH', body: JSON.stringify(body) }),
   users: () => request<User[]>('/api/users'),
-  user: (id: number) => request<User & { reviews_received: Review[] }>(`/api/users/${id}`),
+  user: (id: number) => request<Profile>(`/api/users/${id}`),
   stats: () => request<Stats>('/api/stats'),
   gigs: (params: Record<string, string> = {}) => {
     const qs = new URLSearchParams(Object.entries(params).filter(([, v]) => v)).toString()

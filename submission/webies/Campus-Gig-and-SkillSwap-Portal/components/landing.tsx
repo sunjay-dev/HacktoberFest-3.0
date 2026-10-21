@@ -13,7 +13,7 @@ const BOARD_GIGS: Gig[] = [
     id: 18, user_id: 4,
     title: 'Resume and cover letter writing',
     description: 'Offering resume rewrites for internship applications, with two revision rounds.',
-    type: 'Offering', category: 'Writing', payment_type: 'Paid', budget: 30,
+    type: 'Offering', category: 'Writing', payment_type: 'Paid', budget: 1000,
     deadline: '2026-11-03', status: 'Open', display_status: 'Open',
     accepted_applicant_id: null, created_at: '2026-10-21',
     owner_name: 'Ayesha Khan', owner_major: 'Sociology', applications_count: 0,
@@ -22,10 +22,10 @@ const BOARD_GIGS: Gig[] = [
     id: 19, user_id: 3,
     title: 'Landing page for my design portfolio',
     description: 'I have the Figma file ready — need a developer to build a responsive one-page site from it.',
-    type: 'Requesting', category: 'Programming', payment_type: 'Paid', budget: 200,
+    type: 'Requesting', category: 'Programming', payment_type: 'Paid', budget: 5000,
     deadline: '2026-11-05', status: 'Open', display_status: 'Open',
     accepted_applicant_id: null, created_at: '2026-10-21',
-    owner_name: 'Ahmed Raza', owner_major: 'Design', applications_count: 1,
+    owner_name: 'Zaheer Abbas', owner_major: 'Design', applications_count: 1,
   },
 ]
 

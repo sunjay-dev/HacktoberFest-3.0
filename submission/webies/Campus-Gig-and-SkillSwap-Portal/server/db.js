@@ -1,11 +1,3 @@
-// Database layer for the PERN backend.
-//
-// Loads server/.env (DATABASE_URL, BETTER_AUTH_SECRET, ...) when present.
-//
-// Two modes, same SQL everywhere:
-//  - DATABASE_URL set  -> real PostgreSQL via `pg` Pool
-//  - DATABASE_URL unset -> embedded PostgreSQL (PGlite) persisted to server/.data/
-//    so the stack runs locally with zero setup, still on genuine Postgres SQL.
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import dotenv from 'dotenv'
@@ -35,13 +27,11 @@ export async function query(text, params = []) {
   return pglite.query(text, params)
 }
 
-// For multi-statement SQL (schema DDL) which prepared-statement query() rejects.
 export async function exec(text) {
   if (pool) return pool.query(text)
   return pglite.exec(text)
 }
 
-// Runs fn with a query function bound to a single connection/transaction.
 export async function withTransaction(fn) {
   if (pool) {
     const client = await pool.connect()
