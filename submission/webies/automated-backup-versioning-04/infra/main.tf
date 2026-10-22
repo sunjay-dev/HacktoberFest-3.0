@@ -1,7 +1,3 @@
-###############################################################################
-# S3 backup bucket
-###############################################################################
-
 resource "aws_s3_bucket" "backup" {
   bucket_prefix = var.bucket_prefix
   force_destroy = var.force_destroy
@@ -99,10 +95,6 @@ resource "aws_s3_bucket_policy" "backup" {
   depends_on = [aws_s3_bucket_public_access_block.backup]
 }
 
-###############################################################################
-# Alerting path: SNS topic -> SQS subscriber (and optional email)
-###############################################################################
-
 resource "aws_sns_topic" "backup_alerts" {
   name_prefix = "${var.project_name}-alerts-"
   tags        = merge(var.tags, { Name = "${var.project_name}-alerts" })
@@ -159,10 +151,6 @@ resource "aws_sns_topic_subscription" "email" {
   endpoint  = var.alert_email
 }
 
-###############################################################################
-# Least-privilege role for the backup process
-###############################################################################
-
 data "aws_iam_policy_document" "backup_assume_role" {
   statement {
     sid     = "AllowBackupServiceToAssumeRole"
@@ -202,8 +190,6 @@ data "aws_iam_policy_document" "backup" {
       "s3:GetObjectVersion",
       "s3:PutObject",
     ]
-    # PutObject also covers the optional reports/ prefix if a team later
-    # chooses to publish backup reports into the same bucket.
     resources = ["${aws_s3_bucket.backup.arn}/*"]
   }
 
